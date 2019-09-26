@@ -4,24 +4,9 @@ The purpose of this test is to evaluate your technical skills, communication and
 
 You should exemplify the :muscle: best work you can do with the provided example and perhaps :boom: surprise us with your solution. You have *one* week time to work on the test, but this our expectations are a function of the time needed for the test.
 
-You are expected to give, a technical feedback to the project as if it's a real life project in code review format. 
+You are expected to give, a technical feedback to the project and fix the possible problems that you are seeing.
 
-## Procedure
-
-1. You fork this repo and make this repository private (duplicate the repository if it's necessary by using GitHub settings).
-2. You do your :sparkles: work
-3. Invite the [reviewers](#reviewers) as collaborators to your repository
-3. You open up a [PR](https://help.github.com/en/articles/about-pull-requests) at your **own** forked version of the repository (please consider an appropriate git workflow here).
-4. You will received feedback for this PR which you are supposed to address during the live interview.
-
-## Reviewers
-
-* [salih-gueler](https://github.com/salih-gueler)
-* [katallaxie](https://github.com/katallaxie)
-* [damian-burke](https://github.com/damian-burke)
-* [matthias-siegmund](https://github.com/matthias-siegmund)
-* [thebix](https://github.com/thebix)
-* [dmazgalin](https://github.com/dmazgalin)
+We have initialised git for the local repository as well. If you want to keep track of your work, feel free to do it.  
 
 ## Project
 
