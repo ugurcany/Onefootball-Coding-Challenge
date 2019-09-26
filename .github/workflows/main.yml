@@ -1,0 +1,19 @@
+name: Build Page
+
+on: [push]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Generate docs
+      run: mkdir -p docs && docker run -v `pwd`:/data pandoc/latex -s --metadata pagetitle="Android Coding Challenge" -o docs/index.html README.md
+    - name: Deploy docs
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.GH_PAT }}
+        BASE_BRANCH: master
+        BRANCH: gh-pages
+        FOLDER: docs
