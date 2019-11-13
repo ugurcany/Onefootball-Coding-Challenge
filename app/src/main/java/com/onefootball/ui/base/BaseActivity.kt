@@ -1,7 +1,7 @@
 package com.onefootball.ui.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
@@ -11,34 +11,32 @@ import com.onefootball.di.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel> : DaggerAppCompatActivity() {
+abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel>
+    : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
+    private var observedDataList: MutableList<LiveData<*>> = ArrayList()
+
     lateinit var binding: V
     lateinit var viewModel: M
-
-    private var observedDataList: MutableList<LiveData<*>> = ArrayList()
 
     abstract fun layoutRes(): Int
     abstract fun viewModelClass(): Class<M>
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        binding = DataBindingUtil.setContentView(this, layoutRes());
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(javaClass.simpleName, "onCreate()")
 
+        //INIT VIEWMODEL
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(viewModelClass())
-
         lifecycle.addObserver(viewModel)
-    }
 
-    override fun onDestroy() {
-        stopObservingData()
-        lifecycle.removeObserver(viewModel)
-        binding.unbind()
-        super.onDestroy()
+        //INIT BINDING
+        binding = DataBindingUtil.setContentView(this, layoutRes())
+        binding.lifecycleOwner = this
     }
 
     fun <D> observe(liveData: LiveData<D>, observer: Observer<D>) {
@@ -53,5 +51,24 @@ abstract class BaseActivity<V : ViewDataBinding, M : BaseViewModel> : DaggerAppC
             liveData.removeObservers(this)
             iterator.remove()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(javaClass.simpleName, "onStart()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(javaClass.simpleName, "onStop()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(javaClass.simpleName, "onDestroy()")
+
+        stopObservingData()
+        lifecycle.removeObserver(viewModel)
+        binding.unbind()
     }
 }

@@ -1,4 +1,4 @@
-package com.onefootball.di.activity
+package com.onefootball.di.helper
 
 import javax.inject.Scope
 

@@ -1,4 +1,4 @@
-package com.onefootball.di.viewmodel;
+package com.onefootball.di.helper;
 
 import androidx.lifecycle.ViewModel;
 
@@ -14,6 +14,6 @@ import dagger.MapKey;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @MapKey
-@interface ViewModelKey {
+public @interface ViewModelKey {
     Class<? extends ViewModel> value();
 }

@@ -1,5 +1,6 @@
 package com.onefootball.di.activity
 
+import com.onefootball.di.helper.ActivityScope
 import com.onefootball.ui.mynews.MyNewsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
