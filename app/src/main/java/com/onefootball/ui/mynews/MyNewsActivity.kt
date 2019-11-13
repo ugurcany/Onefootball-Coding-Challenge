@@ -1,4 +1,4 @@
-package com.onefootball
+package com.onefootball.ui.mynews
 
 import android.content.Intent
 import android.net.Uri
@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.onefootball.R
 import com.onefootball.model.News
 import org.json.JSONArray
 import org.json.JSONObject
