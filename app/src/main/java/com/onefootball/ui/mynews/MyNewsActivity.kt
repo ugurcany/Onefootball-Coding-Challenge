@@ -2,6 +2,8 @@ package com.onefootball.ui.mynews
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,17 +30,19 @@ class MyNewsActivity : BaseActivity<ActivityMyNewsBinding, MyNewsViewModel>() {
 
         //OBSERVE NEWS RESULT
         observe(viewModel.newsResult, Observer {
+            binding.newsRecyclerView.isVisible = false
+            binding.progressBar.isVisible = false
+
             when {
                 it.isLoading() -> {
-                    binding.progressBar.show()
+                    binding.progressBar.isVisible = true
                 }
                 it.isSuccessful() -> {
-                    binding.progressBar.hide()
+                    binding.newsRecyclerView.isVisible = true
                     myAdapter.setNewsItems(it?.data ?: emptyList())
                 }
                 it.isError() -> {
-                    binding.progressBar.hide()
-                    it.error?.printStackTrace()
+                    Toast.makeText(this, R.string.err_text, Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -46,6 +50,7 @@ class MyNewsActivity : BaseActivity<ActivityMyNewsBinding, MyNewsViewModel>() {
 
     override fun onResume() {
         super.onResume()
+        //FETCH NEWS EVERYTIME ONRESUME IS CALLED
         viewModel.getNews()
     }
 

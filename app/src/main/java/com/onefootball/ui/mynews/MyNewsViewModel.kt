@@ -17,13 +17,12 @@ class MyNewsViewModel @Inject internal constructor(
         newsResult.value = RequestResult.loading()
         willDispose(newsRepository.getNews()
             .subscribe(
-            {
-                newsResult.value = RequestResult.success(it)
-            },
-            {
-                newsResult.value = RequestResult.error(it)
-            }
-        ), "GET_NEWS")
+                {
+                    newsResult.value = RequestResult.success(it)
+                },
+                {
+                    newsResult.value = RequestResult.error(it)
+                }
+            ), "GET_NEWS")
     }
-
 }
